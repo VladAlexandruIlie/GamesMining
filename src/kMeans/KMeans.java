@@ -29,8 +29,8 @@ public class KMeans {
         }
 
         //add each entry to the corresponding cluster(closest centroid)
-        for(KMeansData ns:data) {
-            addElementToCluster(ns, clusters);
+        for(KMeansData dataK:data) {
+            addElementToCluster(dataK, clusters);
         }
 
         //verify if we changed anything

@@ -95,8 +95,4 @@ public class KNearestNeighbors {
         }
         System.out.println();
     }
-
-
-
 }
-

@@ -25,14 +25,14 @@ class Surface extends JPanel implements ActionListener {
 
         int j=0;
 
-        for(int age = 17; age <= 50; age ++) {
+        for(int year = 0; year <= 50; year ++) {
             g2d.setPaint(Color.black);
-            g2d.drawLine(0, age * 20, 1000, age * 20);
+            g2d.drawLine(0, year * 20, 1000, year * 20);
         }
 
-        for(int interest = 15; interest <= 50; interest++) {
+        for(int globalSale = 0; globalSale <= 100; globalSale++) {
             g2d.setPaint(Color.BLACK);
-            g2d.drawLine(interest * 20, 0, interest * 20, 1000);
+            g2d.drawLine(globalSale * 20, 0, globalSale * 20, 1000);
         }
 
         int min = 100000; // check the minimum
@@ -49,7 +49,8 @@ class Surface extends JPanel implements ActionListener {
             for (int i = 0; i < cluster.getElements().size(); i++) {
                 int x = (cluster.getElements().get(i).getYear() - min + 1 )* 25;
                 double y = cluster.getElements().get(i).getGlobalSale() * 30;
-                System.out.println("point: " + i + "  x: " + x + "  y: " + y);
+                //coordinates printout
+//                System.out.println("point: " + i + "  x: " + x + "  y: " + y);
                 g2d.fillOval(x, (int)y, 5, 5);
             }
         }
@@ -59,9 +60,9 @@ class Surface extends JPanel implements ActionListener {
         switch(i){
             case 1: return Color.red;
             case 2: return Color.blue;
-            case 3: return Color.green;
+            case 3: return Color.orange;
             case 4: return Color.yellow;
-            case 5: return Color.orange;
+            case 5: return Color.green;
             case 6: return Color.black;
             default: return Color.magenta;
         }
