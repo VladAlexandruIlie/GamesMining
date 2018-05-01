@@ -10,7 +10,7 @@ public class DataLoader {
 		ArrayList<Game> data = new ArrayList<>();
 		int j=0;
 		try {
-			List<List<String>> dataOrig = CSVFileReader.readDataFile("C:\\Users\\iliev\\Desktop\\Games Mining\\src\\data\\GameSales.csv","," ,"",true);
+			List<List<String>> dataOrig = CSVFileReader.readDataFile("src\\data\\GameSales.csv","," ,"",true);
 
 			for (int i=1; i<dataOrig.size(); i+=1) {
 
