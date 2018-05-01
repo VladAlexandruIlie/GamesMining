@@ -39,5 +39,47 @@ public class Game {
         return output;
     }
 
+    public String getRank() {
+        return rank;
+    }
 
+    public String getPlatform() {
+        return platform;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public String getNa_Sales() {
+        return na_Sales;
+    }
+
+    public String getEu_Sales() {
+        return eu_Sales;
+    }
+
+    public String getJp_Sales() {
+        return jp_Sales;
+    }
+
+    public String getOther_Sales() {
+        return other_Sales;
+    }
+
+    public String getGlobal_Sales() {
+        return global_Sales;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
