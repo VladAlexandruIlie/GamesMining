@@ -6,8 +6,7 @@ import java.util.*;
 
 
 public class KNearestNeighbors {
-    /*
-public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayList<KNNData> toTestData, ArrayList<KNNData> trainingData, int k) {
+    public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayList<KNNData> toTestData, ArrayList<KNNData> trainingData, int k) {
         HashMap<KNNData,String> predictions =  new HashMap<>();
 
         for (KNNData unknownPoint : toTestData){
@@ -34,7 +33,6 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
 //            System.out.println(knnData +" -> " + distances.get(knnData));
 //        }
 
-
         List<Map.Entry<KNNData, Double>> list = new ArrayList<>(distances.entrySet());
         Collections.sort(list, (o1, o2) -> (o1.getValue()).compareTo(o2.getValue()));
 
@@ -54,31 +52,35 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
 
     private static double distance(KNNData knnData, KNNData unknownPoint) {
         float distance = 0;
-        ArrayList<Float> x1 = knnData.interests;
-        ArrayList<Float> x2 = unknownPoint.interests;
+        ArrayList<Object> o1 = knnData.getAttributes();
+        ArrayList<Object> o2 = unknownPoint.getAttributes();
 
-        for (int i=0; i<x1.size();i++){
-            distance += Math.pow(x1.get(i) - x2.get(i), 2);
+        if (o1.get(0).equals(o2.get(0))) distance +=1;
+        if (o1.get(1).equals(o2.get(1))) distance +=1;
+
+
+        for (int i=2; i<o1.size();i++){
+            distance += Math.pow((Float)o1.get(i) - (Float)o2.get(i), 2);
         }
         return Math.sqrt(distance);
     }
 
     private static String getResponses(HashMap<KNNData, Double> neighbors) {
         HashMap<String, Integer> labelFrequency = new HashMap<>();
-        ArrayList<String> labels =  new ArrayList<>();
+        ArrayList<String> genres =  new ArrayList<>();
 
         String label ="";
         for (KNNData datapoint: neighbors.keySet()){
 
-            if (labelFrequency.keySet().contains(datapoint.label)){
-                int occurances = labelFrequency.get(datapoint.label) + 1;
+            if (labelFrequency.keySet().contains(datapoint.getGenre())){
+                int occurances = labelFrequency.get(datapoint.getGenre()) + 1;
                 labelFrequency.remove(datapoint.name);
-                labelFrequency.put(datapoint.label, occurances);
+                labelFrequency.put(datapoint.getGenre(), occurances);
             }
             else {
-                labelFrequency.putIfAbsent(datapoint.label, 1);
+                labelFrequency.putIfAbsent(datapoint.getGenre(), 1);
             }
-            labels.add(datapoint.label);
+            genres.add(datapoint.getGenre());
         }
 
 //        System.out.println(labels);
@@ -89,7 +91,7 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
         for (KNNData datapoint :  neighbors.keySet()){
             if (neighbors.get(datapoint) > max) {
                 max = neighbors.get(datapoint);
-                final_label =  datapoint.label;
+                final_label =  datapoint.getGenre();
             }
         }
 
@@ -101,7 +103,7 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
         for (KNNData key: predictions.keySet()){
 
             for (KNNData knownPoint: knnData){
-                if (knownPoint.name.equals(key.getName()) && predictions.get(key).equals(knownPoint.label)) correct++;
+                if (knownPoint.name.equals(key.getName()) && predictions.get(key).equals(knownPoint.getGenre())) correct++;
             }
         }
         return (float) correct/predictions.size() * 100.0 ;
@@ -111,10 +113,10 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
         HashMap<KNNData, Double> neighbors = new HashMap<KNNData, Double>(getNeighbors(trainingData, unknownPoint,k));
 
         String output = "Name: " + unknownPoint.getName() + " >{ Scors: ";
-        for (Float i: unknownPoint.getInterests()){
+        for (Object i: unknownPoint.getAttributes()){
             output += String.format(" %.2f ,",i);
         }
-        output += " -> Known Degree: " + unknownPoint.getLabel() +" }";
+        output += " -> Known Degree: " + unknownPoint.getGenre() +" }";
 
         System.out.print(output);
 
@@ -125,7 +127,7 @@ public static HashMap<KNNData,String> predict(ArrayList<KNNData> knnData, ArrayL
         System.out.println();
     }
 
-*/
+
 
 }
 

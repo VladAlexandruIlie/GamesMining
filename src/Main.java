@@ -11,7 +11,7 @@ public class Main {
     public static void main (String args[]){
         data = DataLoader.LoadData();
         for (Game g: data){
-            System.out.println(g);
+            //System.out.println(g);
         }
 
         //K-NN
@@ -19,15 +19,15 @@ public class Main {
         ArrayList<KNNData> knnData = new ArrayList<>(getKNNData());
         ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(getTrainingData(knnData, toTestData));
-        //HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
+        HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
 
         // k-NN results
-       // printPredictions(predictions);
-       // System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(knnData,predictions));
+        printPredictions(predictions);
+        System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(knnData,predictions));
         printAverageAccuracy(knnData, testSize, kNeighbors,  100);
     }
 
-    public static List<KNNData> getKNNData(){
+    private static List<KNNData> getKNNData(){
         List<KNNData> knnDataPoints = new ArrayList<>();
 
         for (int i= 0; i<data.size(); i++){
@@ -48,7 +48,8 @@ public class Main {
         }
         return knnDataPoints;
     }
-    public static ArrayList<KNNData> getTestData(int testSize) {
+
+    private static ArrayList<KNNData> getTestData(int testSize) {
         ArrayList<KNNData> toTestData = new ArrayList<KNNData>();
         for (int i = 0; i < testSize; i++) {
             ArrayList<KNNData> randomizedDataPoints = new ArrayList<KNNData>(getKNNData());
@@ -68,7 +69,8 @@ public class Main {
         }
         return toTestData;
     }
-    public static ArrayList<KNNData> getTrainingData(ArrayList<KNNData> kNNData, ArrayList<KNNData> toTestData) {
+
+    private static ArrayList<KNNData> getTrainingData(ArrayList<KNNData> kNNData, ArrayList<KNNData> toTestData) {
         ArrayList<KNNData> knnData = new ArrayList<>(getKNNData());
         ArrayList<KNNData> trainingData = new ArrayList<>();
         for (KNNData knnDataPoint: knnData){
@@ -89,7 +91,7 @@ public class Main {
         }
     }
 
-    public static void printAverageAccuracy(ArrayList<KNNData> knnData, int testSize, int kNeighbors, int iterations) {
+    private static void printAverageAccuracy(ArrayList<KNNData> knnData, int testSize, int kNeighbors, int iterations) {
         double accuracyTotal = 0;
         for (int i= 0; i< iterations; i++){
             ArrayList<KNNData> toTestData = new ArrayList<KNNData>(getTestData(testSize));
