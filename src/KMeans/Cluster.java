@@ -5,31 +5,31 @@ import java.util.List;
 
 public class Cluster {
 
-    private List<KMeans.KMeansData> elements;
-    private KMeans.KMeansData centroid;
+    private List<KMeansData> elements;
+    private KMeansData centroid;
 
     public Cluster() {
         elements = new ArrayList<>();
         centroid = null;
     }
 
-    public List<KMeans.KMeansData> getElements() {
+    public List<KMeansData> getElements() {
         return elements;
     }
 
-    public void setElements(List<KMeans.KMeansData> elements) {
+    public void setElements(List<KMeansData> elements) {
         this.elements = elements;
     }
 
-    public KMeans.KMeansData getCentroid() {
+    public KMeansData getCentroid() {
         return centroid;
     }
 
-    public void setCentroid(KMeans.KMeansData centroid) {
+    public void setCentroid(KMeansData centroid) {
         this.centroid = centroid;
     }
 
-    public void addElement(KMeans.KMeansData ns) {
+    public void addElement(KMeansData ns) {
         elements.add(ns);
     }
 }

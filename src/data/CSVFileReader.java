@@ -44,9 +44,11 @@ public class CSVFileReader {
         }
         //read the rest of the csv file
 		while ((line = bufRdr.readLine()) != null) {
-		    String[] data = line.split(seperationChar);
-		    ret.add(Arrays.asList(data));
-		}
+		    if (!line.contains("\"")) {
+				String[] data = line.split(seperationChar);
+				ret.add(Arrays.asList(data));
+				}
+        }
 		bufRdr.close();
 		return ret;
         }

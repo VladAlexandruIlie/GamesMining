@@ -60,7 +60,7 @@ public class KNearestNeighbors {
 
 
         for (int i=2; i<o1.size();i++){
-            distance += Math.pow((Float)o1.get(i) - (Float)o2.get(i), 2);
+            distance += Math.pow((Double.parseDouble(o1.get(i).toString()) - Double.parseDouble(o2.get(i).toString())), 2);
         }
         return Math.sqrt(distance);
     }
@@ -106,7 +106,7 @@ public class KNearestNeighbors {
                 if (knownPoint.name.equals(key.getName()) && predictions.get(key).equals(knownPoint.getGenre())) correct++;
             }
         }
-        return (float) correct/predictions.size() * 100.0 ;
+        return correct/predictions.size() * 100.0 ;
     }
 
     public static void printNeighbors(ArrayList<KNNData> trainingData, KNNData unknownPoint, int k) {

@@ -33,7 +33,10 @@ public class Main {
         for (int i= 0; i<data.size(); i++){
             String name = data.get(i).getName();
             String platform = data.get(i).getPlatform();
+
             String year = data.get(i).getYear();
+
+
             String publisher = data.get(i).getPublisher();
             String na_Sales = data.get(i).getNa_Sales();
             String eu_Sales = data.get(i).getEu_Sales();
@@ -43,8 +46,10 @@ public class Main {
 
             String genre = data.get(i).getGenre();
 
-            KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
-            knnDataPoints.add(kNNDataPoint);
+            if (!year.equals("N/A") && !global_Sales.equals("")) {
+                KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
+                knnDataPoints.add(kNNDataPoint);
+            }
         }
         return knnDataPoints;
     }
@@ -96,9 +101,9 @@ public class Main {
         for (int i= 0; i< iterations; i++){
             ArrayList<KNNData> toTestData = new ArrayList<KNNData>(getTestData(testSize));
             ArrayList<KNNData> trainingData = new ArrayList<KNNData>(getTrainingData(knnData, toTestData));
-            //HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
-            //double accuracy =  KNearestNeighbors.getAccuracy(knnData,predictions);
-            //accuracyTotal = accuracyTotal + accuracy;
+            HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
+            double accuracy =  KNearestNeighbors.getAccuracy(knnData,predictions);
+            accuracyTotal = accuracyTotal + accuracy;
         }
         System.out.printf("Accuracy average over %d randomly generated test sets is: %.3f \n", iterations, accuracyTotal/100.0);
     }

@@ -1,10 +1,5 @@
 package Knn;
-
-import org.junit.Test;
-
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class KNNData {
 
@@ -26,6 +21,7 @@ public class KNNData {
         this.publisher = publisher;
 
         this.year = Double.parseDouble(year);
+
         this.na_Sales = Double.parseDouble(na_Sales);
         this.eu_Sales = Double.parseDouble(eu_Sales);
         this.jp_Sales = Double.parseDouble(jp_Sales);
@@ -62,7 +58,7 @@ public class KNNData {
 
     @Override
     public String toString(){
-        String output = String.format("Name: %s | P: %s | Y: %s | Pb: %s | NA: %s | EU: %s | JP: %s | Other: %s | G: %s | Known Genre: "
+        String output = String.format("Name: %30.30s | P: %7.7s | Y: %5s | Pb: %10.10s | NA: %6s | EU: %6s | JP: %6s | Other: %6s | G: %6s | Known Genre: %10s >"
                 , this.name, this.platform, this.year, this.publisher,
                 this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.genre);
 
