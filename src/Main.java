@@ -8,56 +8,53 @@ import java.util.*;
 public class Main {
     private static List<Game> data = new ArrayList<>();
 
-    public static void main (String args[]){
+    public static void main(String args[]) {
         data = DataLoader.LoadData();
-        for (Game g: data){
-            //System.out.println(g);
-        }
+        System.out.println("Loaded " + data.size() + " data entries.");
 
         //K-NN
-        int testSize = 5; int kNeighbors = 5;
+        int testSize = 10; int kNeighbors = 31;
         ArrayList<KNNData> knnData = new ArrayList<>(getKNNData());
-        ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(testSize));
+        ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(knnData, testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(getTrainingData(knnData, toTestData));
-        HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
+        HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);
 
         // k-NN results
         printPredictions(predictions);
-        System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(knnData,predictions));
+        System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(predictions));
         printAverageAccuracy(knnData, testSize, kNeighbors,  100);
     }
 
-    private static List<KNNData> getKNNData(){
+    private static List<KNNData> getKNNData() {
         List<KNNData> knnDataPoints = new ArrayList<>();
 
-        for (int i= 0; i<data.size(); i++){
-            String name = data.get(i).getName();
-            String platform = data.get(i).getPlatform();
-
-            String year = data.get(i).getYear();
-
-
-            String publisher = data.get(i).getPublisher();
-            String na_Sales = data.get(i).getNa_Sales();
-            String eu_Sales = data.get(i).getEu_Sales();
-            String jp_Sales = data.get(i).getJp_Sales();
-            String other_Sales = data.get(i).getOther_Sales();
-            String global_Sales = data.get(i).getGlobal_Sales();
-
-            String genre = data.get(i).getGenre();
+        int counter=0;
+        for (Game game : data) {
+            String name         = game.getName();
+            String platform     = game.getPlatform();
+            String year         = game.getYear();
+            String publisher    = game.getPublisher();
+            String na_Sales     = game.getNa_Sales();
+            String eu_Sales     = game.getEu_Sales();
+            String jp_Sales     = game.getJp_Sales();
+            String other_Sales  = game.getOther_Sales();
+            String global_Sales = game.getGlobal_Sales();
+            String genre        = game.getGenre();
 
             if (!year.equals("N/A") && !global_Sales.equals("")) {
                 KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
                 knnDataPoints.add(kNNDataPoint);
             }
+            else { counter +=1; }
         }
+        System.out.println("Ignored " + counter + " data entries due to incomplete data");
         return knnDataPoints;
     }
 
-    private static ArrayList<KNNData> getTestData(int testSize) {
-        ArrayList<KNNData> toTestData = new ArrayList<KNNData>();
+    private static ArrayList<KNNData> getTestData(ArrayList<KNNData> knnData, int testSize) {
+        ArrayList<KNNData> toTestData = new ArrayList<>();
         for (int i = 0; i < testSize; i++) {
-            ArrayList<KNNData> randomizedDataPoints = new ArrayList<KNNData>(getKNNData());
+            ArrayList<KNNData> randomizedDataPoints = new ArrayList<>(knnData);
 
             for (int j = 0; j < 5; j++) {
                 Collections.shuffle(randomizedDataPoints);
@@ -65,8 +62,8 @@ public class Main {
             int len = randomizedDataPoints.size();
             int idx = new Random().nextInt(len);
 
-            KNNData dataPoint = getKNNData().get(idx);
-            if (toTestData.contains(dataPoint)) return getTestData(testSize);
+            KNNData dataPoint = knnData.get(idx);
+            if (toTestData.contains(dataPoint)) return getTestData(knnData, testSize);
             else {
                 //String label = "Unknown";
                 toTestData.add(dataPoint);
@@ -76,21 +73,21 @@ public class Main {
     }
 
     private static ArrayList<KNNData> getTrainingData(ArrayList<KNNData> kNNData, ArrayList<KNNData> toTestData) {
-        ArrayList<KNNData> knnData = new ArrayList<>(getKNNData());
+        ArrayList<KNNData> knnData = new ArrayList<>(kNNData);
         ArrayList<KNNData> trainingData = new ArrayList<>();
-        for (KNNData knnDataPoint: knnData){
+        for (KNNData knnDataPoint : knnData) {
             boolean found = false;
-            for (KNNData toTestPoint: toTestData){
+            for (KNNData toTestPoint : toTestData) {
                 if (knnDataPoint.getName().equals(toTestPoint.getName())) found = true;
             }
-            if(!found) trainingData.add(knnDataPoint);
+            if (!found) trainingData.add(knnDataPoint);
         }
         return trainingData;
     }
 
-    public static void printPredictions(HashMap<KNNData, String> predictions) {
+    private static void printPredictions(HashMap<KNNData, String> predictions) {
         System.out.println("Printing the known test set with corresponding predicted label: ");
-        for (KNNData knnData: predictions.keySet()){
+        for (KNNData knnData : predictions.keySet()) {
             String output = knnData.toString() + " Prediction: " + predictions.get(knnData);
             System.out.println(output);
         }
@@ -98,14 +95,14 @@ public class Main {
 
     private static void printAverageAccuracy(ArrayList<KNNData> knnData, int testSize, int kNeighbors, int iterations) {
         double accuracyTotal = 0;
-        for (int i= 0; i< iterations; i++){
-            ArrayList<KNNData> toTestData = new ArrayList<KNNData>(getTestData(testSize));
-            ArrayList<KNNData> trainingData = new ArrayList<KNNData>(getTrainingData(knnData, toTestData));
-            HashMap<KNNData, String> predictions = KNearestNeighbors.predict(knnData, toTestData, trainingData, kNeighbors);
-            double accuracy =  KNearestNeighbors.getAccuracy(knnData,predictions);
+        for (int i = 0; i < iterations; i++) {
+            ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(knnData, testSize));
+            ArrayList<KNNData> trainingData = new ArrayList<>(getTrainingData(knnData, toTestData));
+            HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);
+            double accuracy = KNearestNeighbors.getAccuracy(predictions);
             accuracyTotal = accuracyTotal + accuracy;
         }
-        System.out.printf("Accuracy average over %d randomly generated test sets is: %.3f \n", iterations, accuracyTotal/100.0);
+        System.out.printf("Accuracy average over %d randomly generated test sets is: %.3f \n", iterations, accuracyTotal / (float) iterations);
     }
 
 
