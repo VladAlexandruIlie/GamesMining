@@ -1,8 +1,7 @@
 package data;
 
 
-import KMeans.KMeansClean;
-import KMeans.KMeansData;
+import kMeans.KMeansData;
 
 import java.io.IOException;
 import java.util.ArrayList;

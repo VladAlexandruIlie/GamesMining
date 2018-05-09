@@ -1,8 +1,11 @@
-package KMeans;
+package kMeans;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Has the data of the cluster.
+ */
 public class Cluster {
 
     private List<KMeansData> elements;

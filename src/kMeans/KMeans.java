@@ -1,4 +1,4 @@
-package KMeans;
+package kMeans;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ public class KMeans {
     /**
      * Finds the clusters.
      * @param data - The normalised data.
-     * @param k -
+     * @param k - number of clusters.
      * @return
      */
     public static List<Cluster> getClusters(List<KMeansData> data, int k) {
@@ -47,6 +47,7 @@ public class KMeans {
                 addElementToCluster(ns, newClusters);
             }
 
+
             centroidChanges = false;
             for(int i = 0; i < clusters.size(); i++) {
                 int x1 = clusters.get(i).getCentroid().getYear();
@@ -67,12 +68,17 @@ public class KMeans {
         return clusters;
     }
 
+    /**
+     *
+     * @param cluster
+     * @return The new cluster with only containing the new centroid.
+     */
     private static Cluster getNewCluster(Cluster cluster) {
         int a = 0;
         int b = 0;
-        for(KMeansData ns:cluster.getElements()) {
-            a += ns.getYear();
-            b += ns.getGlobalSale();
+        for(KMeansData normalisedData:cluster.getElements()) {
+            a += normalisedData.getYear();
+            b += normalisedData.getGlobalSale();
         }
         a /= cluster.getElements().size();
         b /= cluster.getElements().size();
@@ -94,18 +100,23 @@ public class KMeans {
         return newCluster;
     }
 
-    private static void addElementToCluster(KMeansData ns, List<Cluster> clusters) {
+    /**
+     * Chooses the closest centroid.
+     * @param data - the data element that needs to be added
+     * @param clusters - the clusters where should be added
+     */
+    private static void addElementToCluster(KMeansData data, List<Cluster> clusters) {
         int c = -1;
         double min = 1000000;
         for(int i = 0; i < clusters.size(); i++) {
-            double x = 1.0 * Math.abs(clusters.get(i).getCentroid().getYear() - ns.getYear());
-            double y = 1.0 * Math.abs(clusters.get(i).getCentroid().getGlobalSale() - ns.getGlobalSale());
+            double x = 1.0 * Math.abs(clusters.get(i).getCentroid().getYear() - data.getYear());
+            double y = 1.0 * Math.abs(clusters.get(i).getCentroid().getGlobalSale() - data.getGlobalSale());
             double distance = Math.sqrt(x * x + y * y);
             if(distance < min) {
                 min = distance;
                 c = i;
             }
         }
-        clusters.get(c).addElement(ns);
+        clusters.get(c).addElement(data);
     }
 }

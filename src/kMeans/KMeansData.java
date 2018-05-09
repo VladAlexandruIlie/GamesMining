@@ -1,5 +1,8 @@
-package KMeans;
+package kMeans;
 
+/**
+ * Data used for Kmeans. Normalised.
+ */
 public class KMeansData {
     private int year;
     private double globalSale;
