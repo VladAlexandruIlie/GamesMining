@@ -3,20 +3,20 @@ import java.util.ArrayList;
 
 public class Game {
 
-    private String rank;
+    private int rank;
     private String name;
     private String platform;
-    private String year;
+    private int year;
     private String genre;
     private String publisher;
-    private String na_Sales;
-    private String eu_Sales;
-    private String jp_Sales;
-    private String other_Sales;
-    private String global_Sales;
+    private double na_Sales;
+    private double eu_Sales;
+    private double jp_Sales;
+    private double other_Sales;
+    private double global_Sales;
 
-    public Game(String rank, String name, String platform, String year, String genre, String publisher,
-                String na_Sales, String eu_Sales, String jp_Sales, String other_Sales, String global_Sales) {
+    public Game(int rank, String name, String platform, int year, String genre, String publisher,
+                double na_Sales, double eu_Sales, double jp_Sales, double other_Sales, double global_Sales) {
         this.rank = rank;
         this.name = name;
         this.platform = platform;
@@ -39,7 +39,7 @@ public class Game {
         return output;
     }
 
-    public String getRank() {
+    public int getRank() {
         return rank;
     }
 
@@ -47,7 +47,7 @@ public class Game {
         return platform;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -59,23 +59,23 @@ public class Game {
         return publisher;
     }
 
-    public String getNa_Sales() {
+    public Double getNa_Sales() {
         return na_Sales;
     }
 
-    public String getEu_Sales() {
+    public Double getEu_Sales() {
         return eu_Sales;
     }
 
-    public String getJp_Sales() {
+    public Double getJp_Sales() {
         return jp_Sales;
     }
 
-    public String getOther_Sales() {
+    public Double getOther_Sales() {
         return other_Sales;
     }
 
-    public String getGlobal_Sales() {
+    public Double getGlobal_Sales() {
         return global_Sales;
     }
 

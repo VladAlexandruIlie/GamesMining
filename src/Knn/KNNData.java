@@ -6,23 +6,23 @@ public class KNNData {
     private String platform;
     private String genre;
     private String publisher;
-    private Double year;
+    private Integer year;
     private Double na_Sales;
     private Double eu_Sales;
     private Double jp_Sales;
     private Double other_Sales;
     private Double global_Sales;
 
-    public KNNData(String name, String platform, String year, String genre, String publisher, String na_Sales, String eu_Sales, String jp_Sales, String other_Sales, String global_Sales){
+    public KNNData(String name, String platform, int year, String genre, String publisher, double na_Sales, double eu_Sales, double jp_Sales, double other_Sales, double global_Sales){
         this.name = name;
         this.platform = platform;
         this.publisher = publisher;
-        this.year = Double.parseDouble(year);
-        this.na_Sales = Double.parseDouble(na_Sales);
-        this.eu_Sales = Double.parseDouble(eu_Sales);
-        this.jp_Sales = Double.parseDouble(jp_Sales);
-        this.other_Sales = Double.parseDouble(other_Sales);
-        this.global_Sales = Double.parseDouble(global_Sales);
+        this.year = year;
+        this.na_Sales = na_Sales;
+        this.eu_Sales = eu_Sales;
+        this.jp_Sales = jp_Sales;
+        this.other_Sales = other_Sales;
+        this.global_Sales = global_Sales;
         this.genre = genre;
     }
 
@@ -30,7 +30,7 @@ public class KNNData {
     public String getPlatform()     { return platform; }
     public String getGenre()        { return genre; }
     public String getPublisher()    { return publisher; }
-    public Double getYear()         { return year; }
+    public Integer getYear()         { return year; }
 //    public Double getNa_Sales()     { return na_Sales; }
 //    public Double getEu_Sales()     { return eu_Sales; }
 //    public Double getJp_Sales()     { return jp_Sales; }
@@ -52,7 +52,7 @@ public class KNNData {
 
     @Override
     public String toString(){
-        return String.format("Name: %30.30s | P: %5.5s | Y: %5.0f | Pb: %10.10s | NA: %6s | EU: %6s | JP: %6s | Other: %6s | G: %6s | Known Genre: %12s >"
+        return String.format("Name: %30.30s | P: %5.5s | Y: %5d | Pb: %10.10s | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
                 , this.name, this.platform, this.year, this.publisher,
                 this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.genre);
     }
