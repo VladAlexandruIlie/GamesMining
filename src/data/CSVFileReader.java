@@ -1,8 +1,5 @@
 package data;
 
-
-import org.w3c.dom.stylesheets.LinkStyle;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -24,10 +21,9 @@ public class CSVFileReader {
 	 * @param nullValue What to insert in case of missing values
 	 * //@param headerRow Does data file contain a header row?
 	 * @return Data file content as a 2D string array
-	 * @throws IOException
 	 */
 	public static List<List<String>> readDataFile(String csvFile, String seperationChar, String nullValue, boolean headerRow) throws IOException {
-        List<List<String>> ret = new ArrayList<List<String>>();
+        List<List<String>> ret = new ArrayList<>();
         BufferedReader bufRdr = new BufferedReader(new FileReader(new File(csvFile)));
         String line ;
 
@@ -36,7 +32,7 @@ public class CSVFileReader {
             line = bufRdr.readLine();
 
             String[] header1 = line.split(seperationChar);
-            List<String> header = new ArrayList<String>();
+            List<String> header = new ArrayList<>();
             for (String s : header1) {
                 header.add(s.trim());
             }

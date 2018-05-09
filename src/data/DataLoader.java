@@ -1,7 +1,5 @@
 package data;
-
-
-import KMeans.KMeansData;
+//import kMeans.KMeansData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,7 +12,7 @@ public class DataLoader {
 		int j=0;
 		try {
 			List<List<String>> dataOrig = CSVFileReader.readDataFile("src/data/GameSales.csv","(,)" ,"",true);
-			KMeansData kData = new KMeansData();
+			//KMeansData kData = new KMeansData();
 
 			for (int i=1; i<dataOrig.size(); i+=1) {
 				String rank = dataOrig.get(i).get(0);
