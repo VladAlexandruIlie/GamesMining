@@ -1,8 +1,11 @@
-package KMeans;
+package kMeans;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Has the data of the cluster.
+ */
 public class Cluster {
 
     private List<KMeansData> elements;
@@ -15,10 +18,6 @@ public class Cluster {
 
     public List<KMeansData> getElements() {
         return elements;
-    }
-
-    public void setElements(List<KMeansData> elements) {
-        this.elements = elements;
     }
 
     public KMeansData getCentroid() {
