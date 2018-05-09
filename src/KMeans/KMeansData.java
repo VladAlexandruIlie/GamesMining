@@ -16,13 +16,9 @@ public class KMeansData {
         this.publisher = publisher;
     }
 
-    public KMeansData() {
-    }
+    public KMeansData() { }
 
-    public int getYear() {
-
-        return year;
-    }
+    public int getYear() { return year; }
 
     public void setYear(int year) {
         this.year = year;
@@ -38,7 +34,7 @@ public class KMeansData {
 
     public double getEuSale() {
         return euSale;
-    }
+    } //just in case we need to use the other sale data
 
     public void setEuSale(double euSale) {
         this.euSale = euSale;
@@ -59,5 +55,4 @@ public class KMeansData {
     public void setPublisher(String publisher) {
         this.publisher = publisher;
     }
-
 }

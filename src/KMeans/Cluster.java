@@ -17,10 +17,6 @@ public class Cluster {
         return elements;
     }
 
-    public void setElements(List<KMeansData> elements) {
-        this.elements = elements;
-    }
-
     public KMeansData getCentroid() {
         return centroid;
     }

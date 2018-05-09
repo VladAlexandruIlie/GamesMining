@@ -1,6 +1,7 @@
 package data;
 
 
+import KMeans.KMeansClean;
 import KMeans.KMeansData;
 
 import java.io.IOException;
@@ -32,52 +33,11 @@ public class DataLoader {
                 Game newGame = new Game(rank, name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales,other_Sales,global_Sales);
                 j++;
                 data.add(newGame);
-
-                /*
-				int yearKmeans = getYear(year);
-                //for the N/A values
-                if (yearKmeans!=0) {
-                    kData.setYear(yearKmeans);
-                } else continue;
-                kData.setAmericaSale(getUsSale(na_Sales));
-                kData.setEuSale(getEuSale(eu_Sales));
-                kData.setGlobalSale(getTotalSale(global_Sales));
-                */
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return data;
-	}
-
-	private static int getYear(String string){
-		string = string.split(" ")[0];
-		int year = 0;
-		try {
-			year = Integer.parseInt(string);
-		} catch (NumberFormatException e) {
-			year = 0;
-		}
-		return year;
-	}
-	private static double getTotalSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
-	}
-	private static double getUsSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
-	}
-
-	private static double getEuSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
 	}
 }
