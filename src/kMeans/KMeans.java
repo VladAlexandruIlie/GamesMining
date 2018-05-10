@@ -18,8 +18,8 @@ public class KMeans {
         List<Cluster> clusters = new ArrayList<>();
 
         //initial clusters - randomly generated
-        List<KMeansData> temp = new ArrayList<>();
-        temp.addAll(data);
+        List<KMeansData> temp = new ArrayList<>(data);
+
         for(int i = 1; i <= k; i++) {
             int rng = new Random().nextInt(temp.size());
             Cluster cluster = new Cluster();

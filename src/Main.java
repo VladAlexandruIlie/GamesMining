@@ -12,11 +12,13 @@ import java.util.*;
 
 public class Main {
     private static List<Game> data = new ArrayList<>();
-    private static List<KMeansData> dataK = new ArrayList<>();
+    private static List<KMeansData> dataK = new ArrayList<>(Cleaner.getKmeansData(data));
 
     public static void main(String args[]) {
         DataRepository gamesData = new DataRepository(DataLoader.LoadData());
         gamesData.printNumberOfEntries();
+        data = DataRepository.getGamesData();
+        dataK = Cleaner.getKmeansData(data);
 
         //K-NN
         int testSize = 10;
@@ -30,8 +32,8 @@ public class Main {
         // k-NN results
         DataRepository.printPredictions(predictions);
         System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(predictions));
-        DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
-        dataK = Cleaner.getKmeansData(data);
+        //DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
+        System.out.println();
 
         //kMeans results
         //clustering by K-means - create clusters to determine games performance based on global sale and the year they were launched

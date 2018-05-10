@@ -16,7 +16,7 @@ public class DataRepository {
     public void printNumberOfEntries() {
         System.out.println("Loaded " + gamesData.size() + " survey answers.");
     }
-    private static  ArrayList<Game> getGamesData() {
+    public static ArrayList<Game> getGamesData() {
         return gamesData;
     }
 
