@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-
+import java.awt.Color;
 /**
  * Class used to create the visualization for Kmeans. Not sure if we want to use it for the submission.
  * Doesn't accept double and it's annoying. (see line 51, y variable) Global sales are dispplayed on the image Graph as ints..
@@ -56,6 +56,9 @@ class Surface extends JPanel implements ActionListener {
         }
     }
 
+
+
+
     private Color getColor(int i) {
         switch(i){
             case 1: return Color.red;
@@ -66,6 +69,10 @@ class Surface extends JPanel implements ActionListener {
             case 6: return Color.black;
             case 7: return Color.cyan;
             case 8: return Color.LIGHT_GRAY;
+            case 9: return new Color(255,102,102);
+            case 10: return new Color(255,204, 51);
+            case 11: return new Color(102, 51, 0);
+            case 12: return new Color(102, 0, 153);
             default: return Color.magenta;
         }
     }
