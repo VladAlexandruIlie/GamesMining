@@ -31,7 +31,6 @@ public class DataRepository {
     }
     private static Double findLow(List<Double> totalScores) {
         Double dataLow = 10000.0;
-
         for (Double score : totalScores) {
             if (score < dataLow) dataLow = score;
         }
@@ -72,7 +71,9 @@ public class DataRepository {
             } else {
                 counter += 1;
             }
+
         }
+        System.out.println("Ignored " + counter + " entries due to incomplete data");
 
         years = normaliseData(years,1.0,0.0);
         //NAsales = normaliseData(NAsales,10.0,0.0);
