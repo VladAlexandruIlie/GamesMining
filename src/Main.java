@@ -21,10 +21,8 @@ public class Main {
         dataK = Cleaner.getKmeansData(data);
 
         //K-NN
-        int testSize = 10;
-        int kNeighbors = 7;
+        int testSize = 10; int kNeighbors = 19;
         ArrayList<KNNData> knnData = new ArrayList<>(DataRepository.getKNNData());
-        //knnData = DataRepository.
         ArrayList<KNNData> toTestData = new ArrayList<>(DataRepository.getTestData(knnData, testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(DataRepository.getTrainingData(knnData, toTestData));
         HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);
@@ -32,7 +30,7 @@ public class Main {
         // k-NN results
         DataRepository.printPredictions(predictions);
         System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(predictions));
-        //DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
+        DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
         System.out.println();
 
         //kMeans results

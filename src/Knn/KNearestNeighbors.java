@@ -44,8 +44,8 @@ public class KNearestNeighbors {
         ArrayList<Object> o1 = knnData.getAttributes();
         ArrayList<Object> o2 = unknownPoint.getAttributes();
 
-        if (!o1.get(0).equals(o2.get(0))) distance +=0.5;
-        if (!o1.get(1).equals(o2.get(1))) distance +=0.5;
+        if (!o1.get(0).equals(o2.get(0))) distance +=0.15;
+        if (!o1.get(1).equals(o2.get(1))) distance +=0.15;
         for (int i=2; i<o1.size();i++){
             distance += Math.pow((Double.parseDouble(o2.get(i).toString()) - Double.parseDouble(o1.get(i).toString())), 2);
         }
@@ -57,15 +57,17 @@ public class KNearestNeighbors {
 
         for (KNNData datapoint: neighbors.keySet()){
 
-            if (genreFrequency.keySet().contains(datapoint.getGenre())){
-                int occurances = genreFrequency.get(datapoint.getGenre()) + 1;
+            if (genreFrequency.keySet().contains(datapoint.getPlatform())){
+                int occurances = genreFrequency.get(datapoint.getPlatform()) + 1;
                 genreFrequency.remove(datapoint.getName());
-                genreFrequency.put(datapoint.getGenre(), occurances);
+                genreFrequency.put(datapoint.getPlatform(), occurances);
             }
             else {
-                genreFrequency.putIfAbsent(datapoint.getGenre(), 1);
+                genreFrequency.putIfAbsent(datapoint.getPlatform(), 1);
             }
         }
+
+        //System.out.println(genreFrequency);
 
         double max = -1;
         String final_label ="";
@@ -81,8 +83,9 @@ public class KNearestNeighbors {
     public static double getAccuracy(HashMap<KNNData, String> predictions) {
         float correct = 0;
         for (KNNData key: predictions.keySet()){
-            if (key.getGenre().equals(predictions.get(key))) correct +=1;
+            if (key.getPlatform().equals(predictions.get(key))) correct +=1;
         }
+        //System.out.println(correct);
         return correct/predictions.size() * 100.0 ;
     }
 

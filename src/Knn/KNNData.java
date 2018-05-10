@@ -39,7 +39,7 @@ public class KNNData {
 
     public ArrayList<Object> getAttributes() {
         ArrayList<Object> attributes = new ArrayList<>();
-        attributes.add(this.platform);
+        attributes.add(this.genre);
         attributes.add(this.publisher);
         attributes.add(this.year);
         attributes.add(this.na_Sales);
@@ -52,8 +52,8 @@ public class KNNData {
 
     @Override
     public String toString(){
-        return String.format("Name: %30.30s | P: %5.5s | Pb: %10.10s | Y: %5.3f | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
-                , this.name, this.platform, this.publisher, this.year,
-                this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.genre);
+        return String.format("Name: %30.30s | G: %5.5s | Pb: %10.10s | Y: %5.3f | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Platform: %5s >"
+                , this.name, this.genre, this.publisher, this.year,
+                this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.platform);
     }
 }
