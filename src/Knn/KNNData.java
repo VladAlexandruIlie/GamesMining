@@ -52,8 +52,8 @@ public class KNNData {
 
     @Override
     public String toString(){
-        return String.format("Name: %30.30s | P: %5.5s | Y: %5d | Pb: %10.10s | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
-                , this.name, this.platform, this.year, this.publisher,
+        return String.format("Name: %30.30s | P: %5.5s | Pb: %10.10s | Y: %5d | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
+                , this.name, this.platform, this.publisher, this.year,
                 this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.genre);
     }
 }

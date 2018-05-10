@@ -11,6 +11,7 @@ public class DataRepository {
 
     public DataRepository(ArrayList<Game> games){
         gamesData = games;
+
     }
     public void printNumberOfEntries() {
         System.out.println("Loaded " + gamesData.size() + " survey answers.");
@@ -19,54 +20,70 @@ public class DataRepository {
         return gamesData;
     }
 
+    // Min-Max Normalization
+    private float findHigh(List<Float> totalScores) {
+        float dataHigh = -1;
 
-//    // Min-Max Normalization
-//    private float findHigh(List<Float> totalScores) {
-//        float dataHigh = -1;
-//
-//        for (Float score : totalScores) {
-//            if (score > dataHigh) dataHigh = (float) score;
-//        }
-//        return dataHigh;
-//    }
-//    private float findLow(List<Float> totalScores) {
-//        float dataLow = 10000;
-//
-//        for (Float score : totalScores) {
-//            if (score < dataLow) dataLow = (float) score;
-//        }
-//        return dataLow;
-//    }
-//    private float MinMaxNormalize(Float score, float dataHigh, float dataLow, float normalizedHigh, float normalizedLow) {
-//        if (dataHigh == dataLow) return (float) 1 / 2;
-//        else return ((score - dataLow) / (dataHigh - dataLow)) * (normalizedHigh - normalizedLow) + normalizedLow;
-//    }
+        for (Float score : totalScores) {
+            if (score > dataHigh) dataHigh = (float) score;
+        }
+        return dataHigh;
+    }
+    private float findLow(List<Float> totalScores) {
+        float dataLow = 10000;
 
+        for (Float score : totalScores) {
+            if (score < dataLow) dataLow = (float) score;
+        }
+        return dataLow;
+    }
+    private float MinMaxNormalize(Float score, float dataHigh, float dataLow, float normalizedHigh, float normalizedLow) {
+        if (dataHigh == dataLow) return (float) 1 / 2;
+        else return ((score - dataLow) / (dataHigh - dataLow)) * (normalizedHigh - normalizedLow) + normalizedLow;
+    }
 
     public static List<KNNData> getKNNData() {
         List<KNNData> knnDataPoints = new ArrayList<>();
 
-        int counter=0;
+        ArrayList<String> names = new ArrayList<>();
+        ArrayList<String> platforms = new ArrayList<>();
+        ArrayList<String> publishers = new ArrayList<>();
+        ArrayList<String> genres = new ArrayList<>();
+        ArrayList<Integer> years = new ArrayList<>();
+        ArrayList<Double> NAsales = new ArrayList<>();
+        ArrayList<Double> EUsales = new ArrayList<>();
+        ArrayList<Double> JPsales = new ArrayList<>();
+        ArrayList<Double> OTsales = new ArrayList<>();
+        ArrayList<Double> GBsales = new ArrayList<>();
+
+        int counter = 0;
         for (Game game : getGamesData()) {
-            String name         = game.getName();
-            String platform     = game.getPlatform();
-            String year         = game.getYear();
-            String publisher    = game.getPublisher();
-            String na_Sales     = game.getNa_Sales();
-            String eu_Sales     = game.getEu_Sales();
-            String jp_Sales     = game.getJp_Sales();
-            String other_Sales  = game.getOther_Sales();
-            String global_Sales = game.getGlobal_Sales();
-            String genre        = game.getGenre();
-
-            if (!year.equals("N/A") && !global_Sales.equals("")) {
-                KNNData kNNDataPoint = new KNNData(name, platform, Integer.parseInt(year), genre, publisher,
-                        Double.parseDouble(na_Sales), Double.parseDouble(eu_Sales), Double.parseDouble(jp_Sales),
-                        Double.parseDouble(other_Sales), Double.parseDouble(global_Sales));
-                knnDataPoints.add(kNNDataPoint);
+            if (!game.getYear().equals("N/A") && !game.getGlobal_Sales().equals("")) {
+                names.add(game.getName());
+                platforms.add(game.getPlatform());
+                publishers.add(game.getPublisher());
+                years.add(Integer.parseInt(game.getYear()));
+                NAsales.add(Double.parseDouble(game.getNa_Sales()));
+                EUsales.add(Double.parseDouble(game.getEu_Sales()));
+                JPsales.add(Double.parseDouble(game.getJp_Sales()));
+                OTsales.add(Double.parseDouble(game.getOther_Sales()));
+                GBsales.add(Double.parseDouble(game.getGlobal_Sales()));
+                genres.add(game.getGenre());
+            } else {
+                counter += 1;
             }
-
         }
+
+        years = normaliseData( );
+
+            KNNData kNNDataPoint = new KNNData(name, platform, Integer.parseInt(year), genre, publisher,
+                Double.parseDouble(na_Sales), Double.parseDouble(eu_Sales), Double.parseDouble(jp_Sales),
+                Double.parseDouble(other_Sales), Double.parseDouble(global_Sales));
+        knnDataPoints.add(kNNDataPoint);
+
+
+
+
         return knnDataPoints;
     }
 
