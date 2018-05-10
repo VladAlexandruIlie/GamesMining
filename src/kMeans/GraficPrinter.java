@@ -20,17 +20,17 @@ public class GraficPrinter extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-//    public static void main(String[] args) {
-//
-//        EventQueue.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//                List<Cluster> clusters = MainForKmeans.getClusters();
-//
-//                GraficPrinter ex = new GraficPrinter(clusters);
-//                ex.setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String[] args) {
+
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+
+                List<Cluster> clusters = MainForKmeans.getClusters();
+
+                GraficPrinter ex = new GraficPrinter(clusters);
+                ex.setVisible(true);
+            }
+        });
+    }
 }

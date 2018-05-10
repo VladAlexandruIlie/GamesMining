@@ -41,7 +41,6 @@ public class Main {
         printClusters(meansClusters);
         System.out.println("\n");
         System.out.println("------------------------------------------");
-        System.out.println("\n");
     }
 
     private static void printClusters(List<Cluster> clusters) {

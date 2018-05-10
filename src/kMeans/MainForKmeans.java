@@ -16,7 +16,7 @@ public class MainForKmeans {
     public static List<Cluster> getClusters() {
         data = DataLoader.LoadData();
         dataK = Cleaner.getKmeansData(data);
-        int numberOfClusters = 3;
+        int numberOfClusters = 6;
         List<Cluster> meansClusters = KMeans.getClusters(dataK, numberOfClusters);
         return meansClusters;
     }

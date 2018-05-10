@@ -64,6 +64,8 @@ class Surface extends JPanel implements ActionListener {
             case 4: return Color.yellow;
             case 5: return Color.green;
             case 6: return Color.black;
+            case 7: return Color.cyan;
+            case 8: return Color.LIGHT_GRAY;
             default: return Color.magenta;
         }
     }
