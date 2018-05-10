@@ -16,30 +16,30 @@ public class DataRepository {
     public void printNumberOfEntries() {
         System.out.println("Loaded " + gamesData.size() + " survey answers.");
     }
-    private static  ArrayList<Game> getGamesData() {
+    public static ArrayList<Game> getGamesData() {
         return gamesData;
     }
 
     // Min-Max Normalization
-    private float findHigh(List<Float> totalScores) {
-        float dataHigh = -1;
+    private static Double findHigh(List<Double> totalScores) {
+        Double dataHigh = -1.0;
 
-        for (Float score : totalScores) {
-            if (score > dataHigh) dataHigh = (float) score;
+        for (Double score : totalScores) {
+            if (score > dataHigh) dataHigh =  score;
         }
         return dataHigh;
     }
-    private float findLow(List<Float> totalScores) {
-        float dataLow = 10000;
+    private static Double findLow(List<Double> totalScores) {
+        Double dataLow = 10000.0;
 
-        for (Float score : totalScores) {
-            if (score < dataLow) dataLow = (float) score;
+        for (Double score : totalScores) {
+            if (score < dataLow) dataLow = score;
         }
         return dataLow;
     }
-    private float MinMaxNormalize(Float score, float dataHigh, float dataLow, float normalizedHigh, float normalizedLow) {
-        if (dataHigh == dataLow) return (float) 1 / 2;
-        else return ((score - dataLow) / (dataHigh - dataLow)) * (normalizedHigh - normalizedLow) + normalizedLow;
+    private static Double MinMaxNormalize(Double data, Double dataHigh, Double dataLow, Double normalizedHigh, Double normalizedLow) {
+        if (dataHigh == dataLow) return 1/2.0;
+        else return ((data - dataLow) / (dataHigh - dataLow)) * (normalizedHigh - normalizedLow) + normalizedLow;
     }
 
     public static List<KNNData> getKNNData() {
@@ -49,7 +49,7 @@ public class DataRepository {
         ArrayList<String> platforms = new ArrayList<>();
         ArrayList<String> publishers = new ArrayList<>();
         ArrayList<String> genres = new ArrayList<>();
-        ArrayList<Integer> years = new ArrayList<>();
+        ArrayList<Double> years = new ArrayList<>();
         ArrayList<Double> NAsales = new ArrayList<>();
         ArrayList<Double> EUsales = new ArrayList<>();
         ArrayList<Double> JPsales = new ArrayList<>();
@@ -62,7 +62,7 @@ public class DataRepository {
                 names.add(game.getName());
                 platforms.add(game.getPlatform());
                 publishers.add(game.getPublisher());
-                years.add(Integer.parseInt(game.getYear()));
+                years.add(Double.parseDouble(game.getYear()));
                 NAsales.add(Double.parseDouble(game.getNa_Sales()));
                 EUsales.add(Double.parseDouble(game.getEu_Sales()));
                 JPsales.add(Double.parseDouble(game.getJp_Sales()));
@@ -74,17 +74,45 @@ public class DataRepository {
             }
         }
 
-        years = normaliseData( );
+        years = normaliseData(years,1.0,0.0);
+        //NAsales = normaliseData(NAsales,10.0,0.0);
+        //EUsales = normaliseData(EUsales,10.0,0.0);
+        //JPsales = normaliseData(JPsales,10.0,0.0);
+        //OTsales = normaliseData(OTsales,10.0,0.0);
+        //GBsales = normaliseData(GBsales,40.0,0.0);
+        //System.out.println("Years : " + years);
 
-            KNNData kNNDataPoint = new KNNData(name, platform, Integer.parseInt(year), genre, publisher,
-                Double.parseDouble(na_Sales), Double.parseDouble(eu_Sales), Double.parseDouble(jp_Sales),
-                Double.parseDouble(other_Sales), Double.parseDouble(global_Sales));
-        knnDataPoints.add(kNNDataPoint);
+        for(int i =0; i<names.size(); i++) {
+            String name = names.get(i);
+            String platform = platforms.get(i);
+            Double year = years.get(i);
+            String genre = genres.get(i);
+            String publisher = publishers.get(i);
+            Double na_Sales = NAsales.get(i);
+            Double eu_Sales = EUsales.get(i);
+            Double jp_Sales = JPsales.get(i);
+            Double other_Sales = OTsales.get(i);
+            Double global_Sales = GBsales.get(i);
+            KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
+            knnDataPoints.add(kNNDataPoint);
 
-
+        }
 
 
         return knnDataPoints;
+    }
+
+    private static ArrayList<Double> normaliseData(ArrayList<Double> data,Double upperBound, Double lowerBound ) {
+        ArrayList<Double> normalizedData = new ArrayList<>();
+
+        Double dataHigh = findHigh(data);
+        Double dataLow = findLow(data);
+
+        for (Double newYear : data) {
+            Double normalized = MinMaxNormalize(newYear, dataHigh, dataLow, upperBound, lowerBound);
+            normalizedData.add(normalized);
+        }
+        return normalizedData;
     }
 
     public static ArrayList<KNNData> getTestData(ArrayList<KNNData> knnData, int testSize) {

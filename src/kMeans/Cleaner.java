@@ -58,7 +58,7 @@ public class Cleaner {
             kData.setAmericaSale(getUsSale(elemnet.getNa_Sales()));
             kData.setEuSale(getEuSale(elemnet.getEu_Sales()));
             kData.setGlobalSale(getTotalSale(elemnet.getGlobal_Sales()));
-            if(kData.getGlobalSale() == .0) continue;
+            if(kData.getGlobalSale() == 0.0) continue;
 
             results.add(kData);
         }
