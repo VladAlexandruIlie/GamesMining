@@ -67,6 +67,8 @@ public class KNearestNeighbors {
             }
         }
 
+        //System.out.println(genreFrequency);
+
         double max = -1;
         String final_label ="";
         for (String datapoint :  genreFrequency.keySet()){

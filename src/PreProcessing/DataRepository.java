@@ -59,7 +59,43 @@ public class DataRepository {
         for (Game game : getGamesData()) {
             if (!game.getYear().equals("N/A") && !game.getGlobal_Sales().equals("")) {
                 names.add(game.getName());
-                platforms.add(game.getPlatform());
+
+                String platform = game.getPlatform();
+                switch(platform){
+                    case "2600": platform = "2600"; break;
+                    case "3DO": platform = "3DS"; break;
+                    case "3DS": platform = "3DS"; break;
+                    case "DC": platform = "DS"; break;
+                    case "DS": platform = "DS"; break;
+                    case "GB": platform = "GBA"; break;
+                    case "GBA": platform = "GBA"; break;
+                    case "GC": platform = "N64"; break;
+                    case "GG": platform = "N64"; break;
+                    case "GEN": platform = "N64"; break;
+                    case "N64": platform = "N64"; break;
+                    case "NES": platform = "N64"; break;
+                    case "NG": platform = "N64"; break;
+                    case "PC": platform = "PC"; break;
+                    case "PCFX": platform = "PC"; break;
+                    case "PS": platform = "PS"; break;
+                    case "PS2": platform = "PS"; break;
+                    case "PS3": platform = "PS"; break;
+                    case "PS4": platform = "PS"; break;
+                    case "PSP": platform = "PSP"; break;
+                    case "PSV": platform = "PSP"; break;
+                    case "SAT": platform = "SAT"; break;
+                    case "SCD": platform = "SAT"; break;
+                    case "SNES": platform = "N64"; break;
+                    case "TG16": platform = "PC"; break;
+                    case "Wii": platform = "Wii"; break;
+                    case "WiiU": platform = "Wii"; break;
+                    case "X360": platform = "XBox"; break;
+                    case "XB": platform = "XBox"; break;
+                    case "XOne": platform = "XBox"; break;
+                    default: platform = "other"; break;
+                }
+                platforms.add(platform);
+
                 publishers.add(game.getPublisher());
                 years.add(Double.parseDouble(game.getYear()));
                 NAsales.add(Double.parseDouble(game.getNa_Sales()));
@@ -93,7 +129,7 @@ public class DataRepository {
             Double eu_Sales = EUsales.get(i);
             Double jp_Sales = JPsales.get(i);
             Double other_Sales = OTsales.get(i);
-            Double global_Sales = GBsales.get(i);
+            Double global_Sales = na_Sales + eu_Sales + jp_Sales + other_Sales;
             KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
             knnDataPoints.add(kNNDataPoint);
 

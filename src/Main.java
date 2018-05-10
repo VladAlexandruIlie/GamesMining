@@ -21,7 +21,7 @@ public class Main {
         dataK = Cleaner.getKmeansData(data);
 
         //K-NN
-        int testSize = 10; int kNeighbors = 21;
+        int testSize = 10; int kNeighbors = 19;
         ArrayList<KNNData> knnData = new ArrayList<>(DataRepository.getKNNData());
         ArrayList<KNNData> toTestData = new ArrayList<>(DataRepository.getTestData(knnData, testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(DataRepository.getTrainingData(knnData, toTestData));
