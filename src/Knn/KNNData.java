@@ -6,14 +6,14 @@ public class KNNData {
     private String platform;
     private String genre;
     private String publisher;
-    private Integer year;
+    private Double year;
     private Double na_Sales;
     private Double eu_Sales;
     private Double jp_Sales;
     private Double other_Sales;
     private Double global_Sales;
 
-    public KNNData(String name, String platform, int year, String genre, String publisher, double na_Sales, double eu_Sales, double jp_Sales, double other_Sales, double global_Sales){
+    public KNNData(String name, String platform, Double year, String genre, String publisher, double na_Sales, double eu_Sales, double jp_Sales, double other_Sales, double global_Sales){
         this.name = name;
         this.platform = platform;
         this.publisher = publisher;
@@ -30,7 +30,7 @@ public class KNNData {
     public String getPlatform()     { return platform; }
     public String getGenre()        { return genre; }
     public String getPublisher()    { return publisher; }
-    public Integer getYear()         { return year; }
+    public Double getYear()         { return year; }
 //    public Double getNa_Sales()     { return na_Sales; }
 //    public Double getEu_Sales()     { return eu_Sales; }
 //    public Double getJp_Sales()     { return jp_Sales; }
@@ -52,7 +52,7 @@ public class KNNData {
 
     @Override
     public String toString(){
-        return String.format("Name: %30.30s | P: %5.5s | Pb: %10.10s | Y: %5d | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
+        return String.format("Name: %30.30s | P: %5.5s | Pb: %10.10s | Y: %5.3f | NA: %3.2f | EU: %3.2f | JP: %3.2f | Other: %3.2f | G: %3.2f | Known Genre: %12s >"
                 , this.name, this.platform, this.publisher, this.year,
                 this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales, this.genre);
     }

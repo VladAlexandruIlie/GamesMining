@@ -8,7 +8,7 @@ public class KNearestNeighbors {
         for (KNNData unknownPoint : toTestData){
             HashMap<KNNData, Double> neighbors = new HashMap<>(getNeighbors(trainingData, unknownPoint, k));
 
-            printNeighbors(trainingData,unknownPoint,k);
+            //printNeighbors(trainingData,unknownPoint,k);
 
             String label = getResponses(neighbors);
             predictions.put(unknownPoint, label);
