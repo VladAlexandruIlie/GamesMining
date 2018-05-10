@@ -16,6 +16,7 @@ public class Main {
         //K-NN
         int testSize = 10; int kNeighbors = 31;
         ArrayList<KNNData> knnData = new ArrayList<>(DataRepository.getKNNData());
+        //knnData = DataRepository.
         ArrayList<KNNData> toTestData = new ArrayList<>(DataRepository.getTestData(knnData, testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(DataRepository.getTrainingData(knnData, toTestData));
         HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);

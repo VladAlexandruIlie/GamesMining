@@ -1,6 +1,4 @@
 package data;
-//import kMeans.KMeansData;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,8 +10,6 @@ public class DataLoader {
 		int j=0;
 		try {
 			List<List<String>> dataOrig = CSVFileReader.readDataFile("src/data/GameSales.csv","(,)" ,"",true);
-			//KMeansData kData = new KMeansData();
-
 			for (int i=1; i<dataOrig.size(); i+=1) {
 				String rank = dataOrig.get(i).get(0);
 				String name = dataOrig.get(i).get(1);
@@ -31,51 +27,11 @@ public class DataLoader {
                 j++;
                 data.add(newGame);
 
-                /*
-				int yearKmeans = getYear(year);
-                //for the N/A values
-                if (yearKmeans!=0) {
-                    kData.setYear(yearKmeans);
-                } else continue;
-                kData.setAmericaSale(getUsSale(na_Sales));
-                kData.setEuSale(getEuSale(eu_Sales));
-                kData.setGlobalSale(getTotalSale(global_Sales));
-                */
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return data;
-	}
-
-	private static int getYear(String string){
-		string = string.split(" ")[0];
-		int year = 0;
-		try {
-			year = Integer.parseInt(string);
-		} catch (NumberFormatException e) {
-			year = 0;
-		}
-		return year;
-	}
-	private static double getTotalSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
-	}
-	private static double getUsSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
-	}
-
-	private static double getEuSale(String string){
-		string = string.split(" ")[0];
-		double sales = 0.0;
-		sales = Double.parseDouble(string);
-		return sales;
 	}
 }

@@ -32,7 +32,6 @@ public class Game {
 
     @Override
     public String toString() {
-
         return String.format("Rank: %6s | Name: %30s | Platform %7s | Y: %5s | G: %10s | Pub: %10s | NA: %4s | EU: %4s | JP: %4s | Other: %4s | Global: %4s "
                , this.rank, this.name, this.platform, this.year, this.genre, this.publisher,
                 this.na_Sales, this.eu_Sales, this.jp_Sales, this.other_Sales, this.global_Sales);
