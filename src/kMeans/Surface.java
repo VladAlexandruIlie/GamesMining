@@ -51,14 +51,12 @@ class Surface extends JPanel implements ActionListener {
                 double y = cluster.getElements().get(i).getGlobalSale() * 30;
                 //coordinates printout
 //                System.out.println("point: " + i + "  x: " + x + "  y: " + y);
-                g2d.fillOval(x, (int)y, 5, 5);
+                g2d.fillOval((int)y, x, 8, 8);
             }
         }
     }
 
-
-
-
+    // coloured clusters (max 12)
     private Color getColor(int i) {
         switch(i){
             case 1: return Color.red;
@@ -68,11 +66,10 @@ class Surface extends JPanel implements ActionListener {
             case 5: return Color.green;
             case 6: return Color.black;
             case 7: return Color.cyan;
-            case 8: return Color.LIGHT_GRAY;
-            case 9: return new Color(255,102,102);
-            case 10: return new Color(255,204, 51);
-            case 11: return new Color(102, 51, 0);
-            case 12: return new Color(102, 0, 153);
+            case 8: return new Color(255,102,102);
+            case 9: return new Color(255,174, 51);
+            case 10: return new Color(102, 51, 0);
+            case 11: return new Color(102, 0, 153);
             default: return Color.magenta;
         }
     }

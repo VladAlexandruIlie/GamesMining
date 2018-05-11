@@ -19,6 +19,7 @@ public class Main {
         gamesData.printNumberOfEntries();
         data = DataRepository.getGamesData();
         dataK = Cleaner.getKmeansData(data);
+        System.out.println("Kmeans data entries: " + dataK.size() + " values.");
 
         //K-NN
         int testSize = 10; int kNeighbors = 19;
@@ -35,7 +36,7 @@ public class Main {
 
         //kMeans results
         //clustering by K-means - create clusters to determine games performance based on global sale and the year they were launched
-        int numberOfClusters = 3; // we can set how many clusters we want
+        int numberOfClusters = 4; // we can set how many clusters we want
         System.out.println("K-Means");
         List<Cluster> meansClusters = KMeans.getClusters(dataK, numberOfClusters);
         printClusters(meansClusters);

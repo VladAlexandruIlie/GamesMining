@@ -5,7 +5,8 @@ import java.awt.*;
 import java.util.List;
 
 /**
- * Uncomment and run. Will display the clusters.
+ * Will display the clusters.
+ * This cannot be run within the big main because it cannot call(use) the clusters from getCluster.
  */
 public class GraficPrinter extends JFrame {
 

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Transforms the data from Strings to the preffered type. Loader + cleaning happens here as well.
+ * Transforms the data from Strings to the desired type. Loader + cleaning happens here as well.
  */
 public class Cleaner {
 
@@ -48,18 +48,17 @@ public class Cleaner {
 
     public static List<KMeansData> getKmeansData(List<Game> data){
         List<KMeansData> results = new ArrayList<>();
-        for(Game elemnet: data) {
+        int i = 0;
+        for(Game element: data) {
             KMeansData kData = new KMeansData();
-            int yearKmeans = getYear(elemnet.getYear());
+            int yearKmeans = getYear(element.getYear());
             //for the N/A values
             if (yearKmeans != 0) {
                 kData.setYear(yearKmeans);
             } else continue;
             //kData.setAmericaSale(getUsSale(elemnet.getNa_Sales()));
             //kData.setEuSale(getEuSale(elemnet.getEu_Sales()));
-            kData.setGlobalSale(getTotalSale(elemnet.getGlobal_Sales()));
-            if(kData.getGlobalSale() == 0.0) continue;
-
+            kData.setGlobalSale(getTotalSale(element.getGlobal_Sales()));
             results.add(kData);
         }
         return results;
