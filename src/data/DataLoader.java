@@ -21,7 +21,7 @@ public class DataLoader {
 				String eu_Sales = dataOrig.get(i).get(7);
 				String jp_Sales = dataOrig.get(i).get(8);
 				String other_Sales = dataOrig.get(i).get(9);
-				String global_Sales = dataOrig.get(i).get(10).substring(0,dataOrig.get(i).get(10).length()-1);
+				String global_Sales = dataOrig.get(i).get(10).substring(0,dataOrig.get(i).get(10).length());
 
                 Game newGame = new Game(rank, name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales,other_Sales,global_Sales);
                 j++;

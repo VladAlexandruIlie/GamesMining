@@ -1,4 +1,6 @@
 package Knn;
+import com.sun.scenario.effect.impl.sw.sse.SSEBlend_SRC_OUTPeer;
+
 import java.util.*;
 
 public class KNearestNeighbors {
@@ -8,7 +10,7 @@ public class KNearestNeighbors {
         for (KNNData unknownPoint : toTestData){
             HashMap<KNNData, Double> neighbors = new HashMap<>(getNeighbors(trainingData, unknownPoint, k));
 
-            //printNeighbors(trainingData,unknownPoint,k);
+            printNeighbors(trainingData,unknownPoint,k);
 
             String label = getResponses(neighbors);
             predictions.put(unknownPoint, label);
@@ -67,7 +69,8 @@ public class KNearestNeighbors {
             }
         }
 
-        //System.out.println(genreFrequency);
+        System.out.println(genreFrequency);
+        System.out.println();
 
         double max = -1;
         String final_label ="";
@@ -96,6 +99,6 @@ public class KNearestNeighbors {
         for (KNNData data: neighbors.keySet()){
             System.out.println(data +" "+ String.format("%.4f", neighbors.get(data) ));
         }
-        System.out.println();
+        //System.out.println();
     }
 }

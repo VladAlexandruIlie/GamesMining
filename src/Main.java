@@ -18,6 +18,7 @@ public class Main {
         DataRepository gamesData = new DataRepository(DataLoader.LoadData());
         gamesData.printNumberOfEntries();
         data = DataRepository.getGamesData();
+        System.out.println(data );
         dataK = Cleaner.getKmeansData(data);
         System.out.println("Kmeans data entries: " + dataK.size() + " values.");
 
