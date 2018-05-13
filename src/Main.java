@@ -30,7 +30,7 @@ public class Main {
         HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);
 
         // k-NN results
-        DataRepository.printPredictions(predictions);
+//        DataRepository.printPredictions(predictions);
         System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(predictions));
         //DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
         System.out.println();
@@ -46,9 +46,9 @@ public class Main {
     }
 
     private static void printClusters(List<Cluster> clusters) {
-        System.out.println("clusters: " + clusters.size());
+        System.out.println("Number of clusters: " + clusters.size());
         for (int i = 0; i < clusters.size(); i++) {
-            System.out.println("Index: " + i + " size: " + clusters.get(i).getElements().size());
+            System.out.println("Cluster : " + (i + 1) + "  Number of elements : " + clusters.get(i).getElements().size() + " Centroid data: " + clusters.get(i).getCentroid().toString());
         }
     }
 }

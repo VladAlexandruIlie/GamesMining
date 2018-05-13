@@ -16,7 +16,7 @@ public class GraficPrinter extends JFrame {
         add(surface);
 
         setTitle("Points");
-        setSize(1000, 1000);
+        setSize(4000, 4000);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

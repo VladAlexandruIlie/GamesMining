@@ -13,10 +13,10 @@ public class MainForKmeans {
     private static List<Game> data = new ArrayList<>();
     private static List<KMeansData> dataK = new ArrayList<>();
 
-    public static List<Cluster> getClusters() {
+    public static List<Cluster>  getClusters() {
         data = DataLoader.LoadData();
         dataK = Cleaner.getKmeansData(data);
-        int numberOfClusters = 10;
+        int numberOfClusters = 3;
         List<Cluster> meansClusters = KMeans.getClusters(dataK, numberOfClusters);
         return meansClusters;
     }

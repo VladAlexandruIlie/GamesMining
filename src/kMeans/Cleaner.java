@@ -28,23 +28,6 @@ public class Cleaner {
             return 0.0;
         }
     }
-    public static double getUsSale(String string){
-        string = string.split(" ")[0];
-        try {
-            return Double.parseDouble(string);
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
-
-    public static double getEuSale(String string){
-        string = string.split(" ")[0];
-        try {
-            return Double.parseDouble(string);
-        } catch (NumberFormatException e) {
-            return 0.0;
-        }
-    }
 
     public static List<KMeansData> getKmeansData(List<Game> data){
         List<KMeansData> results = new ArrayList<>();
@@ -56,8 +39,6 @@ public class Cleaner {
             if (yearKmeans != 0) {
                 kData.setYear(yearKmeans);
             } else continue;
-            //kData.setAmericaSale(getUsSale(elemnet.getNa_Sales()));
-            //kData.setEuSale(getEuSale(elemnet.getEu_Sales()));
             kData.setGlobalSale(getTotalSale(element.getGlobal_Sales()));
             results.add(kData);
         }

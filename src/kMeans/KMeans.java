@@ -17,9 +17,9 @@ public class KMeans {
     public static List<Cluster> getClusters(List<KMeansData> data, int k) {
         List<Cluster> clusters = new ArrayList<>();
 
-        //initial clusters - randomly generated
         List<KMeansData> temp = new ArrayList<>(data);
 
+        //initial clusters - randomly generated
         for(int i = 1; i <= k; i++) {
             int rng = new Random().nextInt(temp.size());
             Cluster cluster = new Cluster();
@@ -41,7 +41,7 @@ public class KMeans {
                 newClusters.add(getNewCluster(clusters.get(i)));
             }
 
-            for(KMeansData ns:data) { ////add each entry each of the new closest centroids
+            for(KMeansData ns : data) { ////add each entry each of the new closest centroids
                 addElementToCluster(ns, newClusters);
             }
 

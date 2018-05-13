@@ -19,6 +19,12 @@ public class KMeansData {
         this.publisher = publisher;
     }
 
+    @Override
+    public String toString() {
+        return "year --> " + year +
+                ", globalSale --> " + globalSale;
+    }
+
     public KMeansData() { }
 
     public int getYear() { return year; }

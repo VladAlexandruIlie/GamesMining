@@ -45,6 +45,7 @@ class Surface extends JPanel implements ActionListener {
         }
 
         for(Cluster cluster: clusters) {
+            System.out.println();
             g2d.setPaint(getColor(++j));
             for (int i = 0; i < cluster.getElements().size(); i++) {
                 int x = (cluster.getElements().get(i).getYear() - min + 1 )* 25;
