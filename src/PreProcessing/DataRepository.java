@@ -14,7 +14,7 @@ public class DataRepository {
 
     }
     public void printNumberOfEntries() {
-        System.out.println("Loaded " + gamesData.size() + " survey answers.");
+        System.out.println("Loaded " + gamesData.size() + " game entries.");
     }
     public static ArrayList<Game> getGamesData() {
         return gamesData;
@@ -132,10 +132,7 @@ public class DataRepository {
             Double global_Sales = na_Sales + eu_Sales + jp_Sales + other_Sales;
             KNNData kNNDataPoint = new KNNData(name, platform, year, genre, publisher, na_Sales, eu_Sales, jp_Sales, other_Sales, global_Sales);
             knnDataPoints.add(kNNDataPoint);
-
         }
-
-
         return knnDataPoints;
     }
 
@@ -195,15 +192,18 @@ public class DataRepository {
     }
 
     public static void printAverageAccuracy(ArrayList<KNNData> knnData, int testSize, int kNeighbors, int iterations) {
+        for (int k =5 ; k<= 50 ;  k++ ) {
+        //int k = kNeighbors;
         double accuracyTotal = 0;
-        for (int i = 0; i < iterations; i++) {
-            ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(knnData, testSize));
-            ArrayList<KNNData> trainingData = new ArrayList<>(getTrainingData(knnData, toTestData));
-            HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, kNeighbors);
-            double accuracy = KNearestNeighbors.getAccuracy(predictions);
-            accuracyTotal = accuracyTotal + accuracy;
+            for (int i = 0; i < iterations; i++) {
+                ArrayList<KNNData> toTestData = new ArrayList<>(getTestData(knnData, testSize));
+                ArrayList<KNNData> trainingData = new ArrayList<>(getTrainingData(knnData, toTestData));
+                HashMap<KNNData, String> predictions = KNearestNeighbors.predict(toTestData, trainingData, k);
+                double accuracy = KNearestNeighbors.getAccuracy(predictions);
+                accuracyTotal = accuracyTotal + accuracy;
+            }
+            System.out.printf("Accuracy average over %d randomly generated test sets, using %s neighbors, is: %.3f \n", iterations, k, accuracyTotal / (float) iterations);
         }
-        System.out.printf("Accuracy average over %d randomly generated test sets is: %.3f \n", iterations, accuracyTotal / (float) iterations);
     }
 
 

@@ -22,7 +22,7 @@ public class Main {
         System.out.println("Kmeans data entries: " + dataK.size() + " values.");
 
         //K-NN
-        int testSize = 10; int kNeighbors = 19;
+        int testSize = 10; int kNeighbors = 27;
         ArrayList<KNNData> knnData = new ArrayList<>(DataRepository.getKNNData());
         ArrayList<KNNData> toTestData = new ArrayList<>(DataRepository.getTestData(knnData, testSize));
         ArrayList<KNNData> trainingData = new ArrayList<>(DataRepository.getTrainingData(knnData, toTestData));
@@ -31,7 +31,7 @@ public class Main {
         // k-NN results
         DataRepository.printPredictions(predictions);
         System.out.printf("Accuracy: %.3f \n", KNearestNeighbors.getAccuracy(predictions));
-        DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
+        //DataRepository.printAverageAccuracy(knnData, testSize, kNeighbors, 100);
         System.out.println();
 
         //kMeans results

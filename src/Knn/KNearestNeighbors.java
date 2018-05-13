@@ -44,8 +44,8 @@ public class KNearestNeighbors {
         ArrayList<Object> o1 = knnData.getAttributes();
         ArrayList<Object> o2 = unknownPoint.getAttributes();
 
-        if (!o1.get(0).equals(o2.get(0))) distance +=0.15;
-        if (!o1.get(1).equals(o2.get(1))) distance +=0.15;
+        if (!o1.get(0).equals(o2.get(0))) distance +=0.01;
+        if (!o1.get(1).equals(o2.get(1))) distance +=0.01;
         for (int i=2; i<o1.size();i++){
             distance += Math.pow((Double.parseDouble(o2.get(i).toString()) - Double.parseDouble(o1.get(i).toString())), 2);
         }
